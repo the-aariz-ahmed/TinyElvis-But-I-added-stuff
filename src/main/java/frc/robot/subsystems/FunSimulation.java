@@ -26,7 +26,7 @@ public class FunSimulation extends SubsystemBase {
   private final double BASE_HEIGHT = 20.0;
   private final double TOWER_HEIGHT = 30.0;
   private final double ARM_WIDTH = 10.0;
-  // Rotation offset (degrees). Negative = clockwise rotation.
+  // Rotation offset (degrees).
   private final double rotationOffsetDeg = 90.0;
 
   // Arm parameters
@@ -53,41 +53,34 @@ public class FunSimulation extends SubsystemBase {
 
     // Add arm base
     MechanismLigament2d armBase = root.append(
-      new MechanismLigament2d(
-        "Base",
-        BASE_WIDTH,
-        0 + rotationOffsetDeg,
-        BASE_HEIGHT,
-        new Color8Bit(Color.kDarkGray)
-      )
-    );
+        new MechanismLigament2d(
+            "Base",
+            BASE_WIDTH,
+            0 + rotationOffsetDeg,
+            BASE_HEIGHT,
+            new Color8Bit(Color.kDarkGray)));
 
     // Add tower
     MechanismLigament2d tower = armBase.append(
-      new MechanismLigament2d(
-        "Tower",
-        TOWER_HEIGHT,
-        90 + rotationOffsetDeg,
-        BASE_HEIGHT / 2,
-        new Color8Bit(Color.kGray)
-      )
-    );
+        new MechanismLigament2d(
+            "Tower",
+            TOWER_HEIGHT,
+            90 + rotationOffsetDeg,
+            BASE_HEIGHT / 2,
+            new Color8Bit(Color.kGray)));
 
     // Add the arm pivot point
     MechanismLigament2d pivot = tower.append(
-      new MechanismLigament2d("Pivot", 5, 0, 5, new Color8Bit(Color.kBlack))
-    );
+        new MechanismLigament2d("Pivot", 5, 0, 5, new Color8Bit(Color.kBlack)));
 
     // Add the arm
     armMech = pivot.append(
-      new MechanismLigament2d(
-        "Arm",
-        armLength * visualScaleFactor,
-        0 + rotationOffsetDeg,
-        ARM_WIDTH,
-        new Color8Bit(Color.kBlue)
-      )
-    );
+        new MechanismLigament2d(
+            "Arm",
+            armLength * visualScaleFactor,
+            0 + rotationOffsetDeg,
+            ARM_WIDTH,
+            new Color8Bit(Color.kBlue)));
 
     // Initialize visualization
     SmartDashboard.putData("Arm Sim", mech);
@@ -102,16 +95,13 @@ public class FunSimulation extends SubsystemBase {
 
     // Add telemetry data
     SmartDashboard.putNumber(
-      "Arm Angle (deg)",
-      Units.radiansToDegrees(currentAngleRad)
-    );
+        "Arm Angle (deg)",
+        Units.radiansToDegrees(currentAngleRad));
     SmartDashboard.putNumber(
-      "Arm Velocity (deg/s)",
-      Units.radiansToDegrees(arm.getSimulation().getVelocityRadPerSec())
-    );
+        "Arm Velocity (deg/s)",
+        Units.radiansToDegrees(arm.getSimulation().getVelocityRadPerSec()));
     SmartDashboard.putNumber(
-      "Arm Current (A)",
-      arm.getSimulation().getCurrentDrawAmps()
-    );
+        "Arm Current (A)",
+        arm.getSimulation().getCurrentDrawAmps());
   }
 }
